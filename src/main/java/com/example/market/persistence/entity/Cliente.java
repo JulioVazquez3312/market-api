@@ -18,6 +18,7 @@ import java.util.List;
 @SuperBuilder
 public class Cliente {
     @Id
+    @Column(name = "id")
     private String id;
     private String nombre;
     private String apellidos;

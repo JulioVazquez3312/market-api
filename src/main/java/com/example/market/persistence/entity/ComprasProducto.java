@@ -8,7 +8,7 @@ import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 @Entity
-@Table(name = "compras_productos")
+@Table(name = "COMPRAS_PRODUCTOS")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -26,6 +26,7 @@ public class ComprasProducto {
 
     // Relación con Compra
     @ManyToOne
+    @MapsId("idCompra")
     @JoinColumn(name = "id_compra", insertable = false, updatable = false)
     private Compra compra;
 

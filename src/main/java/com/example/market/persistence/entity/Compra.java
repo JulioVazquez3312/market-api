@@ -1,25 +1,17 @@
 package com.example.market.persistence.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
 @Table(name = "compras")
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@Setter
-@SuperBuilder
 public class Compra {
+
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
+        @Column(name = "id_compra")
         private Integer idCompra;
 
         @Column(name = "id_cliente")
@@ -31,18 +23,14 @@ public class Compra {
         private String medioPago;
 
         private String comentario;
+        private String estado;
 
-        private Boolean estado;
-
-        // Relación con Cliente
         @ManyToOne
         @JoinColumn(name = "id_cliente", insertable = false, updatable = false)
         private Cliente cliente;
 
-        // Relación con Productos
-        @OneToMany(mappedBy = "compra")
+        @OneToMany(mappedBy = "compra", cascade = {CascadeType.ALL})
         private List<ComprasProducto> productos;
-
 
         public Integer getIdCompra() {
                 return idCompra;
@@ -84,11 +72,11 @@ public class Compra {
                 this.comentario = comentario;
         }
 
-        public Boolean getEstado() {
+        public String getEstado() {
                 return estado;
         }
 
-        public void setEstado(Boolean estado) {
+        public void setEstado(String estado) {
                 this.estado = estado;
         }
 
@@ -107,4 +95,5 @@ public class Compra {
         public void setProductos(List<ComprasProducto> productos) {
                 this.productos = productos;
         }
+
 }
